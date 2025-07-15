@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="color-scheme" content="light dark">
+
+
+  <title>Working Time Clock</title>
+<style>
+h1 {text-align: center; text-decoration: overline underline;}
+h2 {text-align: center;}
+h3 {text-align: center;}
+h4 {text-align: center;}
+p {text-align: center;}
+div {text-align: center;}
+body {
+  background-color:fff68f;
+}
+</style>
+
+</head>
+<body>
+  <h1> NTP System Clock </h1>
+  <br>
+  <br> 
+  <h1> <u> Eastern Time  </u></h1>
+  <h2 id="est_time">0:25:02AM July 15, 2025</h2>
+  <h1> <u> Central Time </u></h1>
+  <h2 id="ctr_time">-1:25:02AM</h2>
+  <h1> <u> Mountain Time </u></h1>
+  <h2 id="mtn_time">-2:25:02AM</h2>
+  <h1> <u> Pacific Time </u></h1>
+  <h2 id="pac_time">-3:25:02AM</h2>
+  <h1> <u> UTC Time </u></h1>
+  <h2 id="date-UTCtime">Tue, 15 Jul 2025 04:25:02 GMT</h2>
+  <h1> <u> TimeZone Time </u></h1>
+  <h2 id="date_tztime">Tue Jul 15 2025 00:25:02 GMT-0400 (Eastern Daylight Time)</h2>
+  <h1> <u> Current Time  -5 Hours </u></h1>
+  <h2 id="date-MOONtime">-5:25:02AM</h2>
+  <h1> <u> Current Date &amp; time </u></h1>
+  <h2 id="date_time">July 15, 2025 - 00:25:02AM</h2>
+  <h2 id="date_time"> </h2>
+
+
+
+  <script>
+
+window.addEventListener("load", () => {
+  clock();
+  function clock() {
+    const today = new Date();
+
+    // get time components
+    const hours = today.getHours();
+    const minutes = today.getMinutes();
+    const seconds = today.getSeconds();
+
+    //add '0' to hour, minute & second when they are less 10
+    const hour = hours < 10 ? "0" + hours : hours;
+    const minute = minutes < 10 ? "0" + minutes : minutes;
+    const second = seconds < 10 ? "0" + seconds : seconds;
+
+    //make clock a 12-hour time clock
+    const hourTime = hour > 12 ? hour - 12 : hour;
+
+    // if (hour === 0) {
+    //   hour = 12;
+    // }
+    //assigning 'am' or 'pm' to indicate time of the day
+    const ampm = hour < 12 ? "AM" : "PM";
+
+    // get date components
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const day = today.getDate();
+
+    //declaring a list of all months in  a year
+    const monthList = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    //get current date and time
+    const date = monthList[month] + " " + day + ", " + year;
+    const time = hourTime + ":" + minute + ":" + second + ampm;
+    const uHours = hours;
+    //combine current date and time
+    const dateTime = date + " - " + time;
+    const dateTimeUTC = hours;
+    
+    const clock2 = new Date();
+    var clock3 = (hourTime -5) + ":" + minute + ":" + second + ampm;
+    
+
+    
+    //Eastern Time
+    
+    var est_time = dateTimeUTC + ":" + minute + ":" + second + ampm + " " + date;
+
+    //Central Time
+    var ctr_time = (dateTimeUTC -1) + ":" + minute + ":" + second + ampm;
+    
+    //Mountain Time
+    var mtn_time = (dateTimeUTC -2) + ":" + minute + ":" + second + ampm;
+    
+    //Pacific Time
+    var pac_time = (dateTimeUTC -3) + ":" + minute + ":" + second + ampm;
+    
+
+    //print current date and time to the DOM
+    document.getElementById("date_time").innerHTML = dateTime;
+    document.getElementById("est_time").innerHTML = est_time;
+    document.getElementById("ctr_time").innerHTML = ctr_time;
+    document.getElementById("mtn_time").innerHTML = mtn_time;
+    document.getElementById("pac_time").innerHTML = pac_time;
+    document.getElementById("date_tztime").innerHTML = clock2;
+    document.getElementById("date-UTCtime").innerHTML = clock2.toUTCString();    
+    document.getElementById("date-MOONtime").innerHTML = clock3;
+    setTimeout(clock, 1000);
+  }
+});
+
+</script>
+
+
+</body></html>

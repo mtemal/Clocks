@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="FancyClock_files/BBstyles.css">
+</head>
+<body>
+<br>
+<br>
+<div id="clock">  <h3> Eastern time </h3>
+<br>
+<br>
+<br>
+<br>
+
+  <h1> TimeZoneClock </h1>
+  <h3> Eastern time </h3>
+  <h4 id="est_time">0:26:17AM July 15, 2025</h4>
+  <h3> Central time </h3>
+  <h4 id="ctr_time">-1:26:17AM</h4>
+  <h3> Mountain time </h3>
+  <h4 id="mtn_time">-2:26:17AM</h4>
+  <h3> Pacific time </h3>
+  <h4 id="pac_time">-3:26:17AM</h4>
+  <h3> UTC time </h3>
+  <h4 id="date-UTCtime">Tue, 15 Jul 2025 04:26:17 GMT</h4>
+  <h3> TimeZone time </h3>
+  <h4 id="date_tztime">Tue Jul 15 2025 00:26:17 GMT-0400 (Eastern Daylight Time)</h4>
+  <h3> Moon time  -5 Hours </h3>
+  <h4 id="date-MOONtime">-5:26:17AM</h4>
+  <h3> Date time Variable </h3>
+  <h4 id="date_time">July 15, 2025 - 00:26:17AM</h4>
+
+
+</div>
+
+  <script>
+
+window.addEventListener("load", () => {
+  clock();
+  function clock() {
+    const today = new Date();
+
+    // get time components
+    const hours = today.getHours();
+    const minutes = today.getMinutes();
+    const seconds = today.getSeconds();
+
+    //add '0' to hour, minute & second when they are less 10
+    const hour = hours < 10 ? "0" + hours : hours;
+    const minute = minutes < 10 ? "0" + minutes : minutes;
+    const second = seconds < 10 ? "0" + seconds : seconds;
+
+    //make clock a 12-hour time clock
+    const hourTime = hour > 12 ? hour - 12 : hour;
+
+    // if (hour === 0) {
+    //   hour = 12;
+    // }
+    //assigning 'am' or 'pm' to indicate time of the day
+    const ampm = hour < 12 ? "AM" : "PM";
+
+    // get date components
+    const month = today.getMonth();
+    const year = today.getFullYear();
+    const day = today.getDate();
+
+    //declaring a list of all months in  a year
+    const monthList = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ];
+
+    //get current date and time
+    const date = monthList[month] + " " + day + ", " + year;
+    const time = hourTime + ":" + minute + ":" + second + ampm;
+    const uHours = hours;
+    //combine current date and time
+    const dateTime = date + " - " + time;
+    const dateTimeUTC = hours;
+    
+    const clock2 = new Date();
+    var clock3 = (hourTime -5) + ":" + minute + ":" + second + ampm;
+    
+
+    
+    //Eastern Time
+    
+    var est_time = dateTimeUTC + ":" + minute + ":" + second + ampm + " " + date;
+
+    //Central Time
+    var ctr_time = (dateTimeUTC -1) + ":" + minute + ":" + second + ampm;
+    
+    //Mountain Time
+    var mtn_time = (dateTimeUTC -2) + ":" + minute + ":" + second + ampm;
+    
+    //Pacific Time
+    var pac_time = (dateTimeUTC -3) + ":" + minute + ":" + second + ampm;
+    
+
+    //print current date and time to the DOM
+    document.getElementById("date_time").innerHTML = dateTime;
+    document.getElementById("est_time").innerHTML = est_time;
+    document.getElementById("ctr_time").innerHTML = ctr_time;
+    document.getElementById("mtn_time").innerHTML = mtn_time;
+    document.getElementById("pac_time").innerHTML = pac_time;
+    document.getElementById("date_tztime").innerHTML = clock2;
+    document.getElementById("date-UTCtime").innerHTML = clock2.toUTCString();    
+    document.getElementById("date-MOONtime").innerHTML = clock3;
+    setTimeout(clock, 1000);
+  }
+});
+
+</script>
+
+
+</body></html>
